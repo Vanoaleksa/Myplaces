@@ -14,6 +14,6 @@ class Place: Object {
     @Persisted var location: String?
     @Persisted var type: String?
     @Persisted var image: Data?
-    
+    @Persisted var date = Date()
     
 }
