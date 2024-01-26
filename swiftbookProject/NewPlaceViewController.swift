@@ -32,6 +32,7 @@ class NewPlaceViewController: UITableViewController {
         tableView = UITableView(frame: view.bounds, style: .plain)
         tableView.register(CustomImageNewPlaceCell.self, forCellReuseIdentifier: "CellImage")
         tableView.register(CustomNewPlaceCell.self, forCellReuseIdentifier: "Cell")
+        tableView.register(CustomRatingControllCell.self, forCellReuseIdentifier: "RatingCell")
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorColor = .darkGray
@@ -42,11 +43,20 @@ class NewPlaceViewController: UITableViewController {
 extension NewPlaceViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return newPlaces.count + 1
+        return newPlaces.count + 2
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+        
+        if indexPath.row == 4 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "RatingCell", for: indexPath) as! CustomRatingControllCell
+            if currentPlace != nil {
+                cell.rating = Int(currentPlace!.rating)
+            }
+                
+            return cell
+        }
+        
         if indexPath.row == 0 {
             let imageCell = tableView.dequeueReusableCell(withIdentifier: "CellImage", for: indexPath) as! CustomImageNewPlaceCell
             imageCell.imageNewPlace.image = newImage
@@ -80,22 +90,22 @@ extension NewPlaceViewController {
             
             return cell
         }
-        
     }
     
     func setupEditScreen() {
         guard let place = currentPlace else { return }
-            title = place.name
         
-            newImage = UIImage(data: place.image ?? Data()) ?? UIImage(named: "Photo")
+        title = place.name
+        
+        newImage = UIImage(data: place.image ?? Data()) ?? UIImage(named: "Photo")
             
-            imageIsChanged = true
+        imageIsChanged = true
             
-            newPlace = place
+        newPlace = place
             
-            navigationItem.rightBarButtonItem?.isEnabled = true
+        navigationItem.rightBarButtonItem?.isEnabled = true
                   
-            tableView.reloadData()
+        tableView.reloadData()
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -124,7 +134,6 @@ extension NewPlaceViewController {
             actionSheet.addAction(camera)
             actionSheet.addAction(photo)
             actionSheet.addAction(cancel)
-            
             
             present(actionSheet, animated: true)
         } else {
@@ -161,6 +170,7 @@ extension NewPlaceViewController {
         var type = ""
         var location = ""
         var image: UIImage?
+        var rating = 0.0 
         
         if imageIsChanged {
             image = newImage
@@ -180,23 +190,24 @@ extension NewPlaceViewController {
                 location = cell.newTextField.text ?? ""
             }
         
+        if let cell = tableView.cellForRow(at: IndexPath(row: 4, section: 0)) as? CustomRatingControllCell {
+            rating = Double(cell.rating)
+        }
         
-            
 //         Создаем новый экземпляр Place и заполняем его свойства значениями из текстовых полей
-
-        newPlace.name = name
-        newPlace.type = type
-        newPlace.location = location
-        newPlace.image = imageData
+        
+        let newPlace = Place(name: name,location: location, type: type, image: imageData, rating: rating)
         
         if currentPlace != nil {
-            let realm = try! Realm()
-            try! realm.safeWrite ({
+            try! realm.write ({
                 currentPlace?.name = newPlace.name
                 currentPlace?.location = newPlace.location
                 currentPlace?.type = newPlace.type
                 currentPlace?.image = newPlace.image
+                currentPlace?.rating = newPlace.rating
+                delegate?.didAddNewPlace(newPlace)
             })
+            
         } else {
                 StorageManager.saveObject(newPlace)
                 delegate?.didAddNewPlace(newPlace)
@@ -232,6 +243,9 @@ extension NewPlaceViewController: UIImagePickerControllerDelegate, UINavigationC
 extension NewPlaceViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 4 {
+            return 140
+        }
         if indexPath.row == 0 {
             return 250
         } else {
@@ -256,14 +270,6 @@ extension NewPlaceViewController {
 protocol NewPlaceDelegate: NSObject {
     func didAddNewPlace(_ place: Place)
 }
-
-//extension NewPlaceViewController: EditPlaceDelegate {
-//    func editPlace(_ place: Place) {
-//        currentPlace = place
-//        print(currentPlace)
-////        print(currentPlace)
-//    }
-//}
 
 extension Realm {
     public func safeWrite(_ block: (() throws -> Void)) throws {

@@ -74,6 +74,8 @@ extension ViewController: UITableViewDataSource {
         cell.locationLabel.text = place.location
         cell.typeLabel.text = place.type
         cell.imagePlace.image = UIImage(data: place.image!)
+//        place.rating = 0.0
+        
         
         return cell
     } 
@@ -102,6 +104,7 @@ extension ViewController: UITableViewDelegate  {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let nextController = NewPlaceViewController()
 //        tableView.delegate = self
+        nextController.delegate = self
         let place: Place
         if isFiltering {
             place = filteredPlaces[indexPath.row]
@@ -165,7 +168,7 @@ extension ViewController {
 
 extension ViewController {
     func configureSegmentControll() {
-        var itemsArr = ["Date", "Name"]
+        let itemsArr = ["Date", "Name"]
         
         segmentControll = UISegmentedControl(items: itemsArr)
         segmentControll.translatesAutoresizingMaskIntoConstraints = false
@@ -179,7 +182,6 @@ extension ViewController {
     @objc func sortSelection(_ sender: UISegmentedControl) {
         
         sorting()
-        
     }
 }
 
