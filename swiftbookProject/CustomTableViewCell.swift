@@ -102,7 +102,7 @@ class CustomTableViewCell: UITableViewCell {
         contentView.addSubview(stackView)
                 
         NSLayoutConstraint.activate([
-            stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 23),
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             stackView.heightAnchor.constraint(equalToConstant: 15),
             stackView.widthAnchor.constraint(equalToConstant: 100)

@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             schemaVersion: 3)
         // Use this configuration when opening realms
         Realm.Configuration.defaultConfiguration = config
-        let realm = try! Realm()
+        _ = try! Realm()
 
         
         return true

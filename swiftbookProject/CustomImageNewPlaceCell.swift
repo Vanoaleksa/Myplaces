@@ -10,18 +10,20 @@ import UIKit
 public class CustomImageNewPlaceCell: UITableViewCell {
 
     public var imageNewPlace = UIImageView()
+    var openMapButton = UIButton()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: "CellImage")
         
-        configureCell()
+        configureImagePlaceView()
+        configureMapButton()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureCell() {
+    func configureImagePlaceView() {
         imageNewPlace.translatesAutoresizingMaskIntoConstraints = false
         imageNewPlace.backgroundColor = .gray
         imageNewPlace.contentMode = .center
@@ -37,7 +39,22 @@ public class CustomImageNewPlaceCell: UITableViewCell {
             imageNewPlace.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
-
+    
+    func configureMapButton() {
+        openMapButton.translatesAutoresizingMaskIntoConstraints = false
+        openMapButton.setImage(UIImage(named: "map"), for: .normal)
+        
+        contentView.addSubview(openMapButton)
+        
+        NSLayoutConstraint.activate([
+            openMapButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
+            openMapButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
+            openMapButton.widthAnchor.constraint(equalToConstant: 50),
+            openMapButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
+    }
 }
+
+
 
 

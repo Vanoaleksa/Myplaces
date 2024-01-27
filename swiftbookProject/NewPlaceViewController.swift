@@ -14,10 +14,11 @@ class NewPlaceViewController: UITableViewController {
     let newPlaces = NewPlace.getNames()
     var newImage = UIImage(named: "Photo")
     var newPlace = Place()
+    var currentPlace: Place?
+    
     weak var delegate: NewPlaceDelegate?
     var imageIsChanged = false
     
-    var currentPlace: Place?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,6 +65,8 @@ extension NewPlaceViewController {
             if currentPlace != nil {
                 imageCell.imageNewPlace.contentMode = .scaleAspectFill
             }
+            
+            imageCell.openMapButton.addTarget(self, action: #selector(actionMapButton), for: .touchUpInside)
             
             return imageCell
         } else {
@@ -269,6 +272,18 @@ extension NewPlaceViewController {
 
 protocol NewPlaceDelegate: NSObject {
     func didAddNewPlace(_ place: Place)
+}
+
+extension NewPlaceViewController {
+    //Action mapButton
+    
+    @objc func actionMapButton() {
+        let mapController = MapViewController()
+        
+        mapController.place = currentPlace
+        
+        navigationController?.pushViewController(mapController, animated: true)
+    }
 }
 
 extension Realm {
