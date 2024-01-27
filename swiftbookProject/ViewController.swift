@@ -24,7 +24,6 @@ class ViewController: UIViewController {
     private var isFiltering: Bool {
         return searchController.isActive && !searchBarIssEmpty
     }
-//    weak var delegate: EditPlaceDelegate?
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,8 +73,7 @@ extension ViewController: UITableViewDataSource {
         cell.locationLabel.text = place.location
         cell.typeLabel.text = place.type
         cell.imagePlace.image = UIImage(data: place.image!)
-//        place.rating = 0.0
-        
+        cell.rating = Int(place.rating)
         
         return cell
     } 
@@ -103,17 +101,17 @@ extension ViewController: UITableViewDelegate  {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let nextController = NewPlaceViewController()
-//        tableView.delegate = self
         nextController.delegate = self
+        
         let place: Place
+        
         if isFiltering {
             place = filteredPlaces[indexPath.row]
         } else {
             place = places[indexPath.row]
         }
-//        let selectedPlace = places[indexPath.row]
+        
         nextController.currentPlace = place
-//        delegate?.editPlace(selectedPlace)
         navigationController?.pushViewController(nextController, animated: true)
         
         tableView.deselectRow(at: indexPath, animated: true)
@@ -220,11 +218,6 @@ extension ViewController {
         definesPresentationContext = true
     }
 }
-
-//protocol EditPlaceDelegate: NSObject {
-//    func editPlace(_ place: Place)
-//}
-
 
 extension ViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {

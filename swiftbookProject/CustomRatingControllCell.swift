@@ -42,7 +42,6 @@ class CustomRatingControllCell: UITableViewCell {
             stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             stackView.heightAnchor.constraint(equalToConstant: 44)
         ])
-        
     }
     
     @objc func ratingButtonTapped(button: UIButton) {
