@@ -172,16 +172,10 @@ extension NewPlaceViewController {
         var name = ""
         var type = ""
         var location = ""
-        var image: UIImage?
-        var rating = 0.0 
-        
-        if imageIsChanged {
-            image = newImage
-        } else {
-            image = UIImage(named: "imagePlaceholder")
-        }
-           
+        let image = imageIsChanged ? newImage : UIImage(named: "imagePlaceholder")
         let imageData = image?.pngData()
+        var rating = 0.0
+           
         
         if let cell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? CustomNewPlaceCell {
                 name = cell.newTextField.text!
@@ -279,6 +273,32 @@ extension NewPlaceViewController {
     
     @objc func actionMapButton() {
         let mapController = MapViewController()
+        
+        var name = ""
+        var type = ""
+        var location = ""
+        let image = imageIsChanged ? newImage : UIImage(named: "imagePlaceholder")
+        var rating = 0.0
+           
+        let imageData = image?.pngData()
+        
+        if let cell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? CustomNewPlaceCell {
+                name = cell.newTextField.text!
+            }
+        if let cell = tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as? CustomNewPlaceCell {
+                type = cell.newTextField.text ?? ""
+            }
+        if let cell = tableView.cellForRow(at: IndexPath(row: 3, section: 0)) as? CustomNewPlaceCell {
+                location = cell.newTextField.text ?? ""
+            }
+        
+        if let cell = tableView.cellForRow(at: IndexPath(row: 4, section: 0)) as? CustomRatingControllCell {
+            rating = Double(cell.rating)
+        }
+        
+//         Создаем новый экземпляр Place и заполняем его свойства значениями из текстовых полей
+        
+        let currentPlace = Place(name: name,location: location, type: type, image: imageData, rating: rating)
         
         mapController.place = currentPlace
         
