@@ -7,18 +7,15 @@
 
 import UIKit
 import RealmSwift
-import Realm
 
 class NewPlaceViewController: UITableViewController {
     
-    let newPlaces = NewPlace.getNames()
     var newImage = UIImage(named: "Photo")
     var newPlace = Place()
     var currentPlace: Place?
     
     weak var delegate: NewPlaceDelegate?
     var imageIsChanged = false
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +41,7 @@ class NewPlaceViewController: UITableViewController {
 extension NewPlaceViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return newPlaces.count + 2
+        return 5
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -72,20 +69,24 @@ extension NewPlaceViewController {
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomNewPlaceCell
             if indexPath.row == 1 {
-                cell.newLabel.text = newPlaces[0].name
-                cell.newTextField.placeholder = newPlaces[0].namePlaceholder
+                cell.newLabel.text = "Name"
+                cell.newTextField.placeholder = "Place Name"
                 cell.newTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
                 cell.newTextField.text = newPlace.name
 
             } else if indexPath.row == 2 {
-                cell.newLabel.text = newPlaces[1].name
-                cell.newTextField.placeholder = newPlaces[1].namePlaceholder
+                cell.newLabel.text = "Type"
+                cell.newTextField.placeholder = "Place Type"
                 cell.newTextField.text = newPlace.type ?? ""
 
             } else if indexPath.row == 3 {
-                cell.newLabel.text = newPlaces[2].name
-                cell.newTextField.placeholder = newPlaces[2].namePlaceholder
+                cell.newLabel.text = "Location"
+                cell.newTextField.placeholder = "Place Location"
                 cell.newTextField.text = newPlace.location ?? ""
+                
+                cell.getAdressButton.isEnabled = true
+                cell.getAdressButton.isHidden = false
+                cell.getAdressButton.addTarget(self, action: #selector(getAdress), for: .touchUpInside)
 
             }
             cell.newTextField.delegate = cell
@@ -93,6 +94,14 @@ extension NewPlaceViewController {
             
             return cell
         }
+    }
+    
+    @objc func getAdress() {
+        let mapController = MapViewController()
+        mapController.incomeIdentifier = "getAddress"
+        mapController.mapViewControllerDelegate = self
+        
+        navigationController?.pushViewController(mapController, animated: true)
     }
     
     func setupEditScreen() {
@@ -143,8 +152,6 @@ extension NewPlaceViewController {
             view.endEditing(true)
         }
     }
-    
-  
 }
 
 // MARK: - configureNavBarController
@@ -301,20 +308,29 @@ extension NewPlaceViewController {
         let currentPlace = Place(name: name,location: location, type: type, image: imageData, rating: rating)
         
         mapController.place = currentPlace
+        mapController.incomeIdentifier = "showPlace"
         
         navigationController?.pushViewController(mapController, animated: true)
     }
 }
 
-extension Realm {
-    public func safeWrite(_ block: (() throws -> Void)) throws {
-        if isInWriteTransaction {
-            try block()
+extension NewPlaceViewController: MapViewControllerDelegate {
+    func getAddress(_ address: String?) {
+        if currentPlace != nil {
+            try! realm.write{
+                currentPlace?.location = address
+            }
         } else {
-            try write(block)
+            try! realm.write {
+                newPlace.location = address
+            }
         }
+        
+        tableView.reloadRows(at: [IndexPath(row: 3, section: 0)], with: .automatic)
     }
 }
+
+
 
 
 

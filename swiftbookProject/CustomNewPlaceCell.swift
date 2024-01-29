@@ -17,11 +17,20 @@ class CustomNewPlaceCell: UITableViewCell {
         return label
     }()
     
-    var newTextField : UITextField = {
+    var newTextField: UITextField = {
         let textField = UITextField()
         textField.font = UIFont.systemFont(ofSize: 16)
         
         return textField
+    }()
+    
+    lazy var getAdressButton: UIButton = {
+        let getAdressButton = UIButton()
+        getAdressButton.setImage(UIImage(named: "Placeholder"), for: .normal)
+        getAdressButton.isHidden = true
+        getAdressButton.isEnabled = false
+        
+        return getAdressButton
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -35,7 +44,7 @@ class CustomNewPlaceCell: UITableViewCell {
     }
     
     func configureCell() {
-        [newLabel, newTextField].forEach {
+        [newLabel, newTextField, getAdressButton].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             contentView.addSubview($0)
         }
@@ -49,6 +58,11 @@ class CustomNewPlaceCell: UITableViewCell {
             newTextField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 50),
             newTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 16),
             newTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            
+            getAdressButton.heightAnchor.constraint(equalToConstant: 22),
+            getAdressButton.widthAnchor.constraint(equalToConstant: 22),
+            getAdressButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -17),
+            getAdressButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5)
         ])
     }
 
