@@ -196,7 +196,7 @@ extension NewPlaceViewController {
             rating = Double(cell.rating)
         }
         
-//         Создаем новый экземпляр Place и заполняем его свойства значениями из текстовых полей
+      //Создаем новый экземпляр Place и заполняем его свойства значениями из текстовых полей
         
         let newPlace = Place(name: name,location: location, type: type, image: imageData, rating: rating)
         
@@ -301,7 +301,7 @@ extension NewPlaceViewController {
             rating = Double(cell.rating)
         }
         
-//         Создаем новый экземпляр Place и заполняем его свойства значениями из текстовых полей
+        //Создаем новый экземпляр Place и заполняем его свойства значениями из текстовых полей
         
         let currentPlace = Place(name: name,location: location, type: type, image: imageData, rating: rating)
         

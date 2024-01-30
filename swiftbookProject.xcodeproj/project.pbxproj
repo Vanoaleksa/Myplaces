@@ -35,8 +35,8 @@
 		FA9CDA202B502D8300440FBF /* CustomImageNewPlaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageNewPlaceCell.swift; sourceTree = "<group>"; };
 		FA9DA9272B4C14FA00BF22F7 /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
 		FAA2B6E32B48105F00D8995A /* swiftbookProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = swiftbookProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		FAA2B6E62B48105F00D8995A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FAA2B6E82B48105F00D8995A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		FAA2B6E62B48105F00D8995A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = ../AppDelegate.swift; sourceTree = "<group>"; };
+		FAA2B6E82B48105F00D8995A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SceneDelegate.swift; path = ../SceneDelegate.swift; sourceTree = "<group>"; };
 		FAA2B6EA2B48105F00D8995A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FAA2B6ED2B48105F00D8995A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FAA2B6EF2B48106000D8995A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -59,6 +59,56 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FA0937152B6938CC00CDC435 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				FAA2B6EA2B48105F00D8995A /* ViewController.swift */,
+				FA9CDA1A2B4D402200440FBF /* NewPlaceViewController.swift */,
+				FA5F2C1A2B652F7200A7C4AF /* MapViewController.swift */,
+				FA6750442B4ADC120001DA48 /* CustomTableViewCell.swift */,
+				FA9CDA1C2B4D693E00440FBF /* CustomNewPlaceCell.swift */,
+				FA9CDA202B502D8300440FBF /* CustomImageNewPlaceCell.swift */,
+				FAB644D32B63A11200715E06 /* CustomRatingControllCell.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		FA0937172B69391800CDC435 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FA9DA9272B4C14FA00BF22F7 /* PlaceModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		FA0937182B69393A00CDC435 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				FAE183262B57E96E00E8BA1C /* StorageManager.swift */,
+				FA0937132B692BC900CDC435 /* MapManager.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		FA0937192B69396800CDC435 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				FAA2B6EF2B48106000D8995A /* Assets.xcassets */,
+				FAA2B6E82B48105F00D8995A /* SceneDelegate.swift */,
+				FAA2B6E62B48105F00D8995A /* AppDelegate.swift */,
+			);
+			path = "Support Files";
+			sourceTree = "<group>";
+		};
+		FA09371A2B6939B700CDC435 /* iBuilder */ = {
+			isa = PBXGroup;
+			children = (
+				FAA2B6F12B48106000D8995A /* LaunchScreen.storyboard */,
+				FAA2B6EC2B48105F00D8995A /* Main.storyboard */,
+			);
+			path = iBuilder;
+			sourceTree = "<group>";
+		};
 		FAA2B6DA2B48105F00D8995A = {
 			isa = PBXGroup;
 			children = (
@@ -78,21 +128,11 @@
 		FAA2B6E52B48105F00D8995A /* swiftbookProject */ = {
 			isa = PBXGroup;
 			children = (
-				FAA2B6E62B48105F00D8995A /* AppDelegate.swift */,
-				FAA2B6E82B48105F00D8995A /* SceneDelegate.swift */,
-				FAE183262B57E96E00E8BA1C /* StorageManager.swift */,
-				FA9DA9272B4C14FA00BF22F7 /* PlaceModel.swift */,
-				FAA2B6EA2B48105F00D8995A /* ViewController.swift */,
-				FA6750442B4ADC120001DA48 /* CustomTableViewCell.swift */,
-				FA9CDA1A2B4D402200440FBF /* NewPlaceViewController.swift */,
-				FA9CDA202B502D8300440FBF /* CustomImageNewPlaceCell.swift */,
-				FA9CDA1C2B4D693E00440FBF /* CustomNewPlaceCell.swift */,
-				FAB644D32B63A11200715E06 /* CustomRatingControllCell.swift */,
-				FA5F2C1A2B652F7200A7C4AF /* MapViewController.swift */,
-				FA0937132B692BC900CDC435 /* MapManager.swift */,
-				FAA2B6EC2B48105F00D8995A /* Main.storyboard */,
-				FAA2B6EF2B48106000D8995A /* Assets.xcassets */,
-				FAA2B6F12B48106000D8995A /* LaunchScreen.storyboard */,
+				FA0937152B6938CC00CDC435 /* ViewControllers */,
+				FA0937182B69393A00CDC435 /* Helpers */,
+				FA0937172B69391800CDC435 /* Models */,
+				FA0937192B69396800CDC435 /* Support Files */,
+				FA09371A2B6939B700CDC435 /* iBuilder */,
 				FAA2B6F42B48106000D8995A /* Info.plist */,
 			);
 			path = swiftbookProject;
