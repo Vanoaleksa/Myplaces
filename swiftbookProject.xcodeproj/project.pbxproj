@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA0937142B692BC900CDC435 /* MapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0937132B692BC900CDC435 /* MapManager.swift */; };
 		FA5F2C1B2B652F7200A7C4AF /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5F2C1A2B652F7200A7C4AF /* MapViewController.swift */; };
 		FA6750452B4ADC120001DA48 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6750442B4ADC120001DA48 /* CustomTableViewCell.swift */; };
 		FA9CDA1B2B4D402200440FBF /* NewPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9CDA1A2B4D402200440FBF /* NewPlaceViewController.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FA0937132B692BC900CDC435 /* MapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapManager.swift; sourceTree = "<group>"; };
 		FA5F2C1A2B652F7200A7C4AF /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		FA6750442B4ADC120001DA48 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		FA9CDA1A2B4D402200440FBF /* NewPlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlaceViewController.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 				FA9CDA1C2B4D693E00440FBF /* CustomNewPlaceCell.swift */,
 				FAB644D32B63A11200715E06 /* CustomRatingControllCell.swift */,
 				FA5F2C1A2B652F7200A7C4AF /* MapViewController.swift */,
+				FA0937132B692BC900CDC435 /* MapManager.swift */,
 				FAA2B6EC2B48105F00D8995A /* Main.storyboard */,
 				FAA2B6EF2B48106000D8995A /* Assets.xcassets */,
 				FAA2B6F12B48106000D8995A /* LaunchScreen.storyboard */,
@@ -177,6 +180,7 @@
 				FAB644D42B63A11200715E06 /* CustomRatingControllCell.swift in Sources */,
 				FAA2B6EB2B48105F00D8995A /* ViewController.swift in Sources */,
 				FA9CDA1B2B4D402200440FBF /* NewPlaceViewController.swift in Sources */,
+				FA0937142B692BC900CDC435 /* MapManager.swift in Sources */,
 				FAA2B6E72B48105F00D8995A /* AppDelegate.swift in Sources */,
 				FA9DA9282B4C14FA00BF22F7 /* PlaceModel.swift in Sources */,
 				FA5F2C1B2B652F7200A7C4AF /* MapViewController.swift in Sources */,

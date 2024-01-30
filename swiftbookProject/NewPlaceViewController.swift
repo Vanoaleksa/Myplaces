@@ -83,8 +83,6 @@ extension NewPlaceViewController {
                 cell.newLabel.text = "Location"
                 cell.newTextField.placeholder = "Place Location"
                 cell.newTextField.text = newPlace.location ?? ""
-                
-                cell.getAdressButton.isEnabled = true
                 cell.getAdressButton.isHidden = false
                 cell.getAdressButton.addTarget(self, action: #selector(getAdress), for: .touchUpInside)
 

@@ -28,7 +28,6 @@ class CustomNewPlaceCell: UITableViewCell {
         let getAdressButton = UIButton()
         getAdressButton.setImage(UIImage(named: "Placeholder"), for: .normal)
         getAdressButton.isHidden = true
-        getAdressButton.isEnabled = false
         
         return getAdressButton
     }()
